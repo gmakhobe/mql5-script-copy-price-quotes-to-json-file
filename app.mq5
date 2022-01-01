@@ -15,13 +15,15 @@ input datetime fromDate = D'01.01.2021';
 input datetime toDate = D'30.12.2021';
 input string dataFilename = "datasource.json";
 
-void loadHistoryData(MqlRates& historyData[]){
+bool loadHistoryData(MqlRates& historyData[]){
    int copyRatesStatus = CopyRates(Symbol(), PERIOD_H1, fromDate, toDate, historyData);
    
    if (copyRatesStatus <= 0) {
       Alert("Unable to retrieve data");
+      return true;
    }else{
       Alert("Data successfully retrieved");
+      return false;
    }
 }
 
@@ -74,8 +76,9 @@ void OnStart()
 
    MqlRates historyData[];
  
-   loadHistoryData(historyData);
-   addDataToJsonFile(historyData);
+   if (loadHistoryData(historyData)){
+      addDataToJsonFile(historyData);
+   }
    
    //Alert("Total Elements is : ", ArraySize(historyData));
 }
