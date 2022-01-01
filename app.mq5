@@ -42,7 +42,7 @@ uint writeToJsonFile(int& file_handler, MqlRates& historyData[]) {
       jsonData += "     \"high\": " + (string)historyData[counter].high + ",\r\n";
       jsonData += "     \"low\": " + (string)historyData[counter].low + ",\r\n";
       jsonData += "     \"time\": \"" + (string)historyData[counter].time + "\"\r\n";
-      jsonData += "  }\r\n"; 
+      jsonData += "  },\r\n"; 
    }
    
    jsonData += "}\r\n";
